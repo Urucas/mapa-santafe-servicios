@@ -1,0 +1,30 @@
+{
+  "name": "mapa-santafe-servicios",
+  "version": "0.0.1",
+  "description": "Vista de mapas de SantaFe servicios de la ciudad de Rosario. Mas fácil para buscar uno cerca tuyo.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Urucas/mapa-santafe-servicios.git"
+  },
+  "keywords": [
+    "santa",
+    "fe",
+    "rosario",
+    "mapa",
+    "servicios",
+    "pagos",
+    "argentina"
+  ],
+  "author": "Urucas <hello@urucas.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Urucas/mapa-santafe-servicios/issues"
+  },
+  "homepage": "https://github.com/Urucas/mapa-santafe-servicios",
+  "dependencies": {
+  }
+}
