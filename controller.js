@@ -6,6 +6,7 @@ var app = new (function app() {
   this.container = document.getElementById("map-container");
   this.servicios = servicios;
   this.interval;
+  this.servicios_json = [];
 
   this.getScreenSize = function() {
     return { 
@@ -28,8 +29,22 @@ var app = new (function app() {
     self.map = new google.maps.Map(self.container, mapOptions);
 
     self.geocoder = new google.maps.Geocoder();
-    self.getGeocodes();
+    // self.getGeocodes();
+
+    self.addMarkers();
     
+  }
+
+  this.addMarkers = function() {
+    
+    for(var i=0;i<self.servicios.length;i++) {
+      var s = servicios[i];
+      var marker = new google.maps.Marker({
+        map: self.map,
+        position: new google.maps.LatLng(s.location.lat, s.location.lng),
+        title: s.type+ " - "+ s.address + " - "+ s.city
+      });
+    }  
   }
 
   this.getGeocodes = function() {
@@ -37,15 +52,27 @@ var app = new (function app() {
       var s = self.getNextServicio();
       if(!s) {
         clearInterval(self.interval);
+        console.log(JSON.stringify(self.servicios_json));
         return;
       }
-      var addr = s[1] + ",Rosario,Santa Fe, Argentina";
+      var addr = s[1] + ", "+ s[2]+", Santa Fe, Argentina";
       self.getGeo(addr, function(loc){
         if(!loc) return;
+        self.servicios_json.push({
+          "type": s[0],
+          "address": s[1],
+          "location": {
+            "lat": loc.lat(),
+            "lng": loc.lng()
+          },
+          "city": s[2]
+        });
+        
         var marker = new google.maps.Marker({
           map: self.map,
           position: loc
         });
+
       });
     }, 1000);
   }
